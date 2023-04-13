@@ -9,7 +9,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: horse_admin
-      POSTGRES_PASSWORD: DvQwjcpc7
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: horse_bio_db
     volumes:
       - ./data/db:/var/lib/postgresql/data
@@ -28,7 +28,7 @@ services:
       # - DB_HOST=db
       - POSTGRES_NAME=horse_bio_db
       - POSTGRES_USER=horse_admin
-      - POSTGRES_PASSWORD=DvQwjcpc7
+      - POSTGRES_PASSWORD=password
 
 volumes:
   postgres_data:
