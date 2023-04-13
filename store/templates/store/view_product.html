@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load store_tags %} 
+{% block title %} 
+{{ product.name }} :: {{block.super}} 
+{% endblock title %} 
+{% block products %} 
+{% include 'inc/_breadcrumbs.html' %}
+
+<!-- ======= Blog Details Section ======= -->
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+        <div class="row g-5">
+            <div class="col">
+                <!-- Start posts -->
+                <div class="row gy-4 posts-list">
+                    <div class="col-xl col-md-9">
+                        <article>
+                            <div class="container mt-5 mb-5">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-md-6 border-end">
+                                            <div
+                                                class="d-flex flex-column justify-content-center">
+                                                <div class="main_image">
+                                                    <img
+                                                        src="{{ product.photo.url }}"
+                                                        id="main_product_image"
+                                                        width="120%" />
+                                                </div>
+                                                <div class="thumbnail_images">
+                                                    <ul id="thumbnail">
+                                                        <li>
+                                                            <img
+                                                                onclick="changeImage(this)"
+                                                                src="{{ product.photo.url }}"
+                                                                width="70" />
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 right-side">
+                                                <div
+                                                    class="d-flex justify-content-between align-items-center">
+                                                    <p class="post-category">
+                                                        {{product.category}}
+                                                    </p>
+                                                    <a
+                                                        href="#"
+                                                        class="social-links"
+                                                        ><i
+                                                            class="bi bi-heart"></i
+                                                    ></a>
+                                                </div>
+                                                <div
+                                                    class="d-flex justify-content-between align-items-center">
+                                                    <h4>
+                                                        {{product.name}}
+                                                    </h4>
+                                                </div>
+                                                <div class="mt-2 pr-3 content">
+                                                    <p>
+                                                        {{product.description}}
+                                                    </p>
+                                                </div>
+                                                <h3>
+                                                    {{product.price}} ₽
+                                                </h3>
+                                                <div
+                                                    class="ratings d-flex flex-row align-items-center">
+                                                    <div
+                                                        class="d-flex flex-row">
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-fill"></i>
+                                                    </div>
+                                                    <span>440 оценок</span>
+                                                </div>
+                                                <div class="mt-2 pr-3 content">
+                                                    <p>
+                                                        Артикул:
+                                                        {{product.article}}
+                                                    </p>
+                                                </div>
+                                                <div class="mt-5">
+                                                    <span class="fw-bold">
+                                                        Варианты
+                                                    </span>
+                                                    <div
+                                                        class="thumbnail_images_cart">
+                                                        <ul id="thumbnail">
+                                                            <li>
+                                                                <img
+                                                                    onclick="changeImage(this)"
+                                                                    src="{{ product.photo.url }}"
+                                                                    width="70"
+                                                                    title="Первый вариант" />
+                                                            </li>
+                                                            <li>
+                                                                <img
+                                                                    onclick="changeImage(this)"
+                                                                    src="{{ product.photo.url }}"
+                                                                    width="70"
+                                                                    title="Второй вариант" />
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="buttons d-flex flex-row mt-6 gap-3">
+                                                    <button
+                                                        class="btn btn-outline-success">
+                                                        Купить
+                                                    </button>
+                                                    <button
+                                                        class="btn btn-success">
+                                                        В корзину
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2 pr-3 content">
+                                <p>{{product.description}}</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <!-- End posts -->
+            </div>
+            <!-- End posts -->
+            {% comment %} {% include 'inc/_sidebar.html' %} {% endcomment %}
+        </div>
+    </div>
+</section>
+<!-- End Blog Details Section -->
+
+
+{% endblock products %}
+

@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  db:
+    container_name: horse_bio_db
+    ports:
+      - '5432:5432'
+    restart: always
+    image: postgres
+    environment:
+      POSTGRES_USER: horse_admin
+      POSTGRES_PASSWORD: DvQwjcpc7
+      POSTGRES_DB: horse_bio_db
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      # - DB_HOST=db
+      - POSTGRES_NAME=horse_bio_db
+      - POSTGRES_USER=horse_admin
+      - POSTGRES_PASSWORD=DvQwjcpc7
+
+volumes:
+  postgres_data:
+# docker exec -it container_id psql -U horse_admin -W horse_bio_db

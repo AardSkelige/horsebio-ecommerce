@@ -1,0 +1,62 @@
+{% load store_tags %}
+{% load mptt_tags %}
+<!-- Start Blog Sidebar -->
+<div class="col-lg-3">
+    <div class="sidebar">
+        <!-- Start sidebar search form-->
+        <div class="sidebar-item search-form">
+            <h3 class="sidebar-title">Поиск</h3>
+            <form action="" class="mt-3">
+                <input type="text" />
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+        <!-- End sidebar search form-->
+        <!-- Start sidebar categories-->
+<div class="sidebar-item categories">
+  <h3 class="sidebar-title">Категории</h3>
+  <ul class="mt-3">
+    {% for item in categories %}
+    <li>
+      <a href="{{item.get_absolute_url}}">
+        {{ item.name }} 
+        <span>(25)</span>
+      </a>
+      {% if item.children.exists %}
+      <ul>
+        {% for child in item.children.all %}
+        <li>
+          <a href="{{child.get_absolute_url}}">
+            {{ child.name }} 
+            <span>(25)</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+
+
+        <!-- End sidebar categories-->
+        <!-- Start sidebar tags-->
+<div class="sidebar-item tags">
+            <h3 class="sidebar-title">Tags</h3>
+            <ul class="mt-3">
+                {% for item in categories %}
+                <li>
+                    <a href="{{item.get_absolute_url}}">{{ item.name }}
+                    <span>(25)</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- End sidebar tags-->
+    </div>
+</div>
+<!-- End Blog Sidebar -->

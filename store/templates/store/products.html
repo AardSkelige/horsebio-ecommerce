@@ -1,0 +1,68 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load store_tags %} 
+{% block title %} 
+{{product}} :: {{ block.super }} 
+{% endblock title %} 
+{% block products %} 
+{% include 'inc/_breadcrumbs.html' %}
+
+<!-- ======= Blog Details Section ======= -->
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+        <div class="row g-5">
+            <div class="col-lg">
+                <!-- Start posts -->
+                <div class="row gy-4 posts-list">
+                    {%for product in products%}
+                    <div class="col-xl-4 col-md-9">
+                        <article>
+                            <div class="post-img">
+                                <a href="{{product.get_absolute_url}}">
+                                <img
+                                    src="{{product.photo.url}}"
+                                    alt=""
+                                    class="img-fluid" /></a>
+                            </div>
+                            <p class="post-category">
+                                {{product.category}} |
+                                <a href="{{product.category.get_absolute_url}}">{{ product.category }}</a>
+                            </p>
+                            <h1 class="title">
+                                <a href="{{product.get_absolute_url}}">
+                                    {{product.name}}
+                                </a>
+                            </h1>
+                            <div class="d-flex align-items-center">
+                                <div class="post-meta">
+                                    <p class="post-author-list">
+                                        Цена: {{product.price}} ₽
+                                    </p>
+                                    <p class="post-date">
+                                        Артикул: {{product.article}}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Start blog pagination -->
+                <div class="blog-pagination">
+                    <ul class="justify-content-center">
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
+                </div>
+                <!-- End blog pagination -->
+            </div>
+            <!-- End posts -->
+            {% include 'inc/_sidebar.html' %}
+        </div>
+    </div>
+</section>
+<!-- End Blog Details Section -->
+
+
+{% endblock products %}

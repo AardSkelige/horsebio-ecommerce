@@ -1,0 +1,24 @@
+#header{
+    background: #4c956c;
+}
+#branding h1 a:link, #branding h1 a:visited{
+    color: #fff;
+    font-weight: 500;
+}
+#user-tools, #logout-form button{
+    color: #fff;
+}
+.module h2, .module caption, .inline-group h2{
+    background-color: #4c956c;
+}
+a:link, a:visited{
+    color: #69cd94;
+}
+div.breadcrumbs{
+    background-color: #4c956c;
+    color: lightgrey;
+    font-weight: 500;
+}
+.nowrap{
+    white-space: normal;
+}

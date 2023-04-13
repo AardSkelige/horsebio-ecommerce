@@ -1,0 +1,85 @@
+{% load static %} {% load store_tags %} {% load mptt_tags %}
+<!-- ======= Portfolio Section ======= -->
+<section id="portfolio" class="portfolio sections-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>Портфолио</h2>
+            <p>Наши товары это натуральный и простой способ поддерживать здоровье наших лошадей и собак и давать им возможность достигать своего полного потенциала.</p>
+        </div>
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+            {% comment %} Дерево "Собаки" {% endcomment %}
+            <div>
+                <ul class="portfolio-flters">
+                    <li data-filter="*" class="filter-active">Все товары</li>
+                    <hr>
+                    <br>
+                    {%recursetree dog_series%}
+                        <li data-filter=".filter-{{node.pk}}">{{ node.name }} {{node.pk}}
+                            {% if not node.is_leaf_node %}
+                                <li data-filter=".filter-{{node.pk}}">
+                                    {{ children }}
+                                </li>
+                            {% endif %}
+                        </li>
+                    {% endrecursetree %}
+                    {%recursetree dog_pharma%}
+                        <li data-filter=".filter-{{node.pk}}">{{ node.name }} {{node.pk}}
+                        </li>
+                    {% endrecursetree %}
+                </ul><!-- End Portfolio Filters -->
+            </div>
+            <hr>
+            {% comment %} Дерево "Лошади" {% endcomment %}
+            <div>
+                <ul class="portfolio-flters">
+                    <li data-filter=".filter-{{node.pk}}"></li>
+                    <br>
+                    {%recursetree horse_series%}
+                        <li data-filter=".filter-{{node.pk}}">{{ node.name }} {{node.pk}}
+                            {% if not node.is_leaf_node %}
+                                <li data-filter=".filter-{{node.pk}}">
+                                    {{ children }}
+                                </li>
+                            {% endif %}
+                        </li>
+                    {% endrecursetree %}
+                    {%recursetree horse_pharma%}
+                        <li data-filter=".filter-{{node.pk}}">{{ node.name }} {{node.pk}}
+                            {% if not node.is_leaf_node %}
+                                <li data-filter=".filter-{{node.pk}}">
+                                    {{ children }}
+                                </li>
+                            {% endif %}
+                        </li>
+                    {% endrecursetree %}
+                </ul><!-- End Portfolio Filters -->
+            </div>
+            {%get_products as products%} 
+            {%for product in products%}
+            <div class="row gy-4 portfolio-container">
+                <div class="col-xl-4 col-md-6 portfolio-item filter-{{product.category.pk}}">
+                    <div class="portfolio-wrap">
+                        <a href="{{product.get_absolute_url}}" data-gallery="portfolio-gallery-app"><img src="{{ product.photo.url }}" class="img-fluid" alt=""></a>
+                        <div class="portfolio-info">
+                            <br>
+                            <p>{{product.category}}</p>
+                            {% for product in horse_products_by_pharma %}
+                            <p>{{ product.node.name }}</p>
+                            {% endfor %}
+                            {% for product in horse_products_by_series %}
+                            <p>{{ product.node.name }}</p>
+                            {% endfor %}
+                            <br>
+                            <h4>
+                                <a href="{{product.get_absolute_url}}" title="More Details">{{ product.name }}                                
+                                </a>
+                            </h4>
+                            <p>{{ product.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div><!-- End Portfolio Container -->
+    </div>
+</section><!-- End Portfolio Section --> 

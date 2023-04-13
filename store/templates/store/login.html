@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %} Вход :: {{block.super}}
+{%endblock title %} {% block content %}
+<section id="blog" class="blog">
+    <div class="container justify-content-center">
+        <div class="row posts-list">
+            <div class="col-12">
+                    <article>
+                        {% include 'inc/_notification.html' %}
+                        <form method="post">
+                            <h4>Вход в учетную запись</h4>
+                            {% csrf_token %} {{form.as_p}}
+                            <button class="btn btn-success">Войти</button>
+                        </form>
+                    </article>
+                </div>
+        </div>
+    </div>
+</section>
+<!-- End Contact Section -->
+{% endblock content %}

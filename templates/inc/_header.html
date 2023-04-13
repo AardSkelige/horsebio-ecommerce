@@ -1,0 +1,58 @@
+{% load static %} {% load store_tags %} {% load mptt_tags %}
+<!-- Start Header -->
+<header id="header" class="header d-flex align-items-center">
+    <div
+        class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <img src="{% static 'img/hero-img2.svg' %}" alt="" />
+            <h1>HORSE‑BIO<span>.</span></h1>
+        </a>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#">
+                        <span>Товары</span>
+                        <i class="bi bi-chevron-down dropdown-indicator"> </i>
+                    </a>
+                    <ul>
+                        {%get_categories as categories%} 
+                        {%recursetree categories%}
+                            <li class="dropdown">
+                                <a href="{{ node.get_absolute_url }}">
+                                    <span>{{ node.name }}</span>
+                                    <i class="bi bi-chevron-down dropdown-indicator"></i>
+                                </a>
+                                {% if not node.is_leaf_node %}
+                                <ul>
+                                    <li class="dropdown">
+                                            <span>{{ children }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                {% endif %}
+                            </li>
+                        {% endrecursetree %}
+                        <li><a href="#">Все товары</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#services">О компании</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#contact">Контакты</a></li>
+                {% if request.user.is_authenticated %}
+                <a href="">Привет, {{user.username}} |</a> <a href="{% url 'logout' %}">Выход</a>
+                {% else %}
+                <li><a href="{% url 'register' %}">Регистрация</a></li>
+                <li><a href="{% url 'login' %}">Вход</a></li>
+                {% endif %}
+                
+            </ul>
+        </nav>
+        <!-- .navbar -->
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    </div>
+</header>
+<!-- End Header -->

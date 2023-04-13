@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load store_tags %} 
+{% block title %} 
+{{ pharmacy.title }} :: {{block.super }} 
+{% endblock title %} 
+{% block products %} 
+{% include 'inc/_breadcrumbs.html' %}
+
+<!-- ======= Blog Details Section ======= -->
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+    <div class="row g-5">
+      <div class="col-lg">
+        <!-- Start posts -->
+        <div class="row gy-4 posts-list">
+          {% for item in product %}
+          <div class="col-xl-4 col-md-9">
+            <article>
+              <div class="post-img">
+                <img src="{{ item.photo.url }}" alt="" class="img-fluid" />
+              </div>
+              <p class="post-category">{{ item.series }}</p>
+              <h1 class="title">
+                <a href="{{ item.get_absolute_url }}"> {{item.title}} </a>
+              </h1>
+              <div class="d-flex align-items-center">
+                <div class="post-meta">
+                  <p class="post-author-list">Цена: {{item.price}} ₽</p>
+                  <p class="post-date">Артикул: {{item.article}}</p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          {% endfor %}
+        </div>
+        <!-- Start blog pagination -->
+        <div class="blog-pagination">
+          <ul class="justify-content-center">
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+          </ul>
+        </div>
+        <!-- End blog pagination -->
+      </div>
+      <!-- End posts -->
+      {% include 'inc/_sidebar.html' %}
+    </div>
+  </div>
+</section>
+<!-- End Blog Details Section -->
+
+{% endblock products %}
